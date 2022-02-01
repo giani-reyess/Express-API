@@ -4,7 +4,7 @@ cors = require('cors')
 whiteList = [
   'http://localhost:3000',
   'https://gianireyes.com',
-  'http://localhost:8000'
+  'http://localhost:5050'
 ]
 
 const CORSSetting = {
