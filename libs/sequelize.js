@@ -1,10 +1,9 @@
 /*
   Use Sequelize as the ORM of our project
 */
-
 const { Sequelize } = require('sequelize')
-const { config } = require('../config/config')
 const setupModels = require('../db/model')
+const { config } = require('../config/config')
 
 // Setting enviroment varriables for db connection
 const USER = encodeURIComponent(config.dbUser)
@@ -20,6 +19,6 @@ const sequelize = new Sequelize(URI, {
 setupModels(sequelize)
 
 // Create all our models in db
-sequelize.sync()
+// sequelize.sync()
 
 module.exports = sequelize

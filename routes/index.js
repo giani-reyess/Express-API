@@ -3,6 +3,7 @@ const express = require("express")
 // All router modules
 const productsRouter = require("./productsRouter")
 const usersRouter = require("./usersRouter")
+const customerRouter = require("./customerRouter")
 
 // Middleware router container
 const routerApi = app => {
@@ -14,14 +15,7 @@ const routerApi = app => {
     // Webversion stack
     webrouter.use("/products", productsRouter)
     webrouter.use("/users", usersRouter)
-
-    // Run 'mobilerouter' router middleware in "/api/mobilever"
-    const mobilerouter = express.Router()
-    app.use("/api/mobilever", mobilerouter)
-
-    // Mobile version stack
-    mobilerouter.use("/products", productsRouter)
-    mobilerouter.use("/users", usersRouter)
+    webrouter.use("/customer", customerRouter)
 }
 
 module.exports = routerApi

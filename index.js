@@ -13,7 +13,7 @@ const {
 // App object
 const app = express()
 
-// Midelware stack
+// Midelwares
 app.use(express.json())
 app.use(corsMiddleware())
 routerApi(app)
