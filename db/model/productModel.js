@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
-
-const PRODUCT_TABLE = 'product'
+const { CATEGORY_TABLE } = require('./categoryModel')
+const PRODUCT_TABLE = 'products'
 
 // Table shape
 const ProductSchema = {
@@ -18,12 +18,6 @@ const ProductSchema = {
         allowNull: true,
         type: DataTypes.DECIMAL(2),
     },
-    createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        field: 'created_at',
-        defaultValue: Sequelize.NOW
-    },
     description: {
         allowNull: true,
         type: DataTypes.TEXT,
@@ -31,11 +25,31 @@ const ProductSchema = {
     rating: {
         type: DataTypes.DECIMAL(5, 2),
     },
+    createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        field: 'created_at',
+        defaultValue: Sequelize.NOW
+    },
+    categoryId: {
+        field: 'category_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+            model: CATEGORY_TABLE,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+    }
 }
 
+// API to interact with the db
 class Product extends Model {
-    static associate() {
 
+    // A product can belong to many categories (M-Categories: 1-Product)
+    static associate(models) {
+        this.belongsTo(models.Category, { as: 'category' })
     }
 
     static config(sequelize) {

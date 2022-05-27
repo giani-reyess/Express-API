@@ -4,13 +4,17 @@ const boom = require("@hapi/boom")
 class ProductServices {
     // Create new product
     async create(data) {
-        const newProduct = await models.Product.create(data)
+        const newProduct = await models.Product.create(data, {
+            include: ['category']
+        })
         return newProduct
     }
 
     // Get all the products
     async find() {
-        const findProduct = await models.Product.findAll()
+        const findProduct = await models.Product.findAll({
+            include: ['category']
+        })
         return findProduct
     }
 

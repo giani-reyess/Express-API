@@ -33,9 +33,10 @@ const UserSchema = {
     }
 }
 
-// API for interacting with the db
+// API to interact with the db
 class User extends Model {
-    // "userId" will be the foreign key to relate User with Customer
+
+    // A user can only hold one customer (1-User: 1-Customer)
     static associate(models) {
         this.hasOne(models.Customer, {
             as: 'customer',

@@ -3,6 +3,7 @@ const { USER_TABLE } = require('./userModel')
 
 const CUSTOMER_TABLE = 'customers'
 
+// Table shape
 const CustomerSchema = {
     id: {
         allowNull: false,
@@ -43,12 +44,19 @@ const CustomerSchema = {
     }
 }
 
-// API for interacting with the db
+// API to interact with the db
 class Customer extends Model {
 
     static associate(models) {
-        // User model is related with Customer
+
+        // A customer can only hold one user (1-User: 1-Customer)
         this.belongsTo(models.User, { as: 'user' })
+
+        // Many customer has many orders (M-Customer: M-Order)
+        this.hasMany(models.Order, {
+            as: 'order',
+            foreignKey: 'customerId'
+        })
     }
 
     static config(sequelize) {

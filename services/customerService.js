@@ -3,7 +3,13 @@ const { models } = require('../libs/sequelize');
 
 class CustomerService {
 
-    constructor() {}
+    // Create a new customer with its new user
+    async create(data) {
+        const newCustomer = await models.Customer.create(data, {
+            include: ['user']
+        })
+        return newCustomer
+    }
 
     // Get every customer in DB and bring its user data too
     async find() {
@@ -20,14 +26,6 @@ class CustomerService {
             throw boom.notFound('customer not found')
         }
         return customerId
-    }
-
-    // Create a new customer with its new user
-    async create(data) {
-        const newCustomer = await models.Customer.create(data, {
-            include: ['user']
-        })
-        return newCustomer
     }
 
     // Update one customer by its id

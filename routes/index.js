@@ -4,6 +4,8 @@ const express = require("express")
 const productsRouter = require("./productsRouter")
 const usersRouter = require("./usersRouter")
 const customerRouter = require("./customerRouter")
+const categoriesRouter = require("./categoriesRouter")
+const ordersRouter = require("./ordersRouter")
 
 // Middleware router container
 const routerApi = app => {
@@ -15,7 +17,9 @@ const routerApi = app => {
     // Webversion stack
     webrouter.use("/products", productsRouter)
     webrouter.use("/users", usersRouter)
-    webrouter.use("/customer", customerRouter)
+    webrouter.use("/customers", customerRouter)
+    webrouter.use("/categories", categoriesRouter)
+    webrouter.use("/orders", ordersRouter)
 }
 
 module.exports = routerApi

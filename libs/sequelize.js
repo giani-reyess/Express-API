@@ -1,5 +1,5 @@
 /*
-  Use Sequelize as the ORM of our project
+    In this file we configure sequelize
 */
 const { Sequelize } = require('sequelize')
 const setupModels = require('../db/model')
